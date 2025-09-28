@@ -12,11 +12,16 @@ fn App() -> Element {
     let onsubmit = move |_: FormEvent| async move {
         let url = format!("https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv");
 
-        let res = ureq::get(url).call().unwrap().body_mut().read_to_string();
-
+        let res = ureq::get(url).call();
         match res {
-            Ok(text) => {
-                map.set(Some(parse_town_locations(&text)));
+            Ok(mut success) => {
+                let res_body = success.body_mut().read_to_string();
+                match res_body {
+                    Ok(text) => {
+                        map.set(Some(parse_town_locations(&text)));
+                    }
+                    Err(err) => response.set(format!("Error: {err}")),
+                }
             }
             Err(err) => response.set(format!("Error: {err}")),
         }
@@ -45,6 +50,9 @@ fn App() -> Element {
                             onsubmit,
                             button { "get bus locs" },
                         }
+                    }
+                    p {
+                        "{response}"
                     }
                 },
             }

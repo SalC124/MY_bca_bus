@@ -171,8 +171,7 @@
           shellHook = ''
             echo ""
             export PATH=$PATH:${androidSdkRoot}/platform-tools
-            adb start-server
-            echo "[✔] Dioxus + Android dev shell is ready."
+            echo "run 'adb start-server'"
           '';
         };
       });
