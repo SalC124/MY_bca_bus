@@ -279,6 +279,7 @@ name = "bussing-all-over-the-place-the-final-version"
 version = "0.1.0"
 dependencies = [
  "dioxus",
+ "tokio",
  "ureq",
 ]
 

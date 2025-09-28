@@ -5,9 +5,9 @@ use crate::AppStates;
 
 #[component]
 pub fn BusDisplay() -> Element {
-    let mut app_states = use_context::<AppStates>();
-    let bus_map = app_states.bus_map.read().clone();
-    let response = app_states.response.read().clone();
+    let app_states = use_context::<AppStates>();
+    let mut bus_map = app_states.bus_map;
+    let mut notification = app_states.notification;
 
     let sheet_id = "1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o";
 
@@ -20,12 +20,12 @@ pub fn BusDisplay() -> Element {
                 let res_body = success.body_mut().read_to_string();
                 match res_body {
                     Ok(text) => {
-                        app_states.bus_map.set(Some(parse_town_locations(&text)));
+                        bus_map.set(Some(parse_town_locations(&text)));
                     }
-                    Err(err) => app_states.response.set(format!("Error: {err}")),
+                    Err(err) => notification.set(Some(format!("Error: {err}"))),
                 }
             }
-            Err(err) => app_states.response.set(format!("Error: {err}")),
+            Err(err) => notification.set(Some(format!("Error: {err}"))),
         }
     };
 
@@ -50,9 +50,6 @@ pub fn BusDisplay() -> Element {
                         onsubmit,
                         button { "get bus locs" },
                     }
-                }
-                p {
-                    "{response}"
                 }
             },
         }
