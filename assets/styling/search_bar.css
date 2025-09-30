@@ -28,6 +28,12 @@
     text-indent: 1em;
     font-size: 1.2em;
     background-color: rgba(30, 30, 46, 0.7); /* --base */
-    backdrop-filter: blur(1em);
+    backdrop-filter: blur(0.5em);
     -webkit-backdrop-filter: blur(1em); /* Safari support */
+}
+
+input:focus {
+    outline: none;
+    border: solid var(--mauve);
+    /* background-color: var(--base); */
 }

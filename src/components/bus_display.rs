@@ -45,12 +45,15 @@ pub fn BusDisplay() -> Element {
                     rsx! {
                         div {
                             id: "bus-list-container",
-                            ul {
+                            table {
                                 id: "bus-list",
-                                for (name, code) in sorted {
-                                    li {
-                                        span { class: "location-name", "{name}: " }
-                                        span { class: "location-code", "{code}" }
+                                thead { style: "font-size: 1.5em", "Bus List" }
+                                tbody {
+                                    for (name, code) in sorted {
+                                        tr {
+                                            td { class: "location-name", "{name} " }
+                                            td { class: "location-code", "{code}" }
+                                        }
                                     }
                                 }
                             }

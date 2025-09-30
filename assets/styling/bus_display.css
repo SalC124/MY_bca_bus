@@ -16,7 +16,20 @@
 #bus-list {
     list-style: none;
     content: flex;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+
+    border-collapse: collapse
+
+    /* border-bottom: 1em solid var(--text); */
 }
+
+
+/* #bus-list:last-child { */
+/*     border-bottom: none; */
+/* } */
 
 .location-name {
     color: var(--green);
@@ -26,4 +39,8 @@
 .location-code {
     color: var(--lavender);
     text-align: right;
+}
+
+#bus-list tbody tr:not(:last-child) {
+    border-bottom: 1px solid var(--lavender);
 }

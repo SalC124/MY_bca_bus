@@ -30,13 +30,11 @@ pub fn SearchBar() -> Element {
                     class: "inputs",
                     type: "text",
                     placeholder: "enter town name",
-                    // style: "width: {text_input_width}",
                     name: "query",
                     value: text,
                     oninput
                 }
             }
-            p { "{search_query:?}" }
         }
     }
 }

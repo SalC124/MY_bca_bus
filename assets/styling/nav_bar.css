@@ -44,8 +44,7 @@
     left: 0;
     right: 0;
     background-color: rgba(30, 30, 46, 0.7); /* --base */
-    backdrop-filter: blur(1em);
-    -webkit-backdrop-filter: blur(1em); /* Safari support */
+    backdrop-filter: blur(0.5em);
     text-align: center;
     color: var(--mauve);
     height: 4em;

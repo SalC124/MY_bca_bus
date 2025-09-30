@@ -12,6 +12,7 @@ pub struct AppStates {
     bus_map: Signal<Option<HashMap<String, String>>>,
     notification: Signal<Option<String>>,
     search_query: Signal<Option<String>>,
+    bus_vec: Signal<Vec<(String, String)>>,
 }
 
 #[component]
@@ -20,6 +21,7 @@ fn App() -> Element {
         bus_map: Signal::new(None),
         notification: Signal::new(None),
         search_query: Signal::new(None),
+        bus_vec: Signal::new(Vec::new()),
     });
 
     rsx! {
