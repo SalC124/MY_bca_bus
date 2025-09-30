@@ -15,4 +15,15 @@
 
 #bus-list {
     list-style: none;
+    content: flex;
+}
+
+.location-name {
+    color: var(--green);
+    text-overflow: break;
+}
+
+.location-code {
+    color: var(--lavender);
+    text-align: right;
 }

@@ -6,9 +6,17 @@ const SEARCH_BAR_CSS: Asset = asset!("/assets/styling/search_bar.css");
 
 #[component]
 pub fn SearchBar() -> Element {
+    let mut search_query = use_context::<AppStates>().search_query;
     let mut text: Signal<String> = use_signal(|| "".to_string());
-    let onchange = move |evt: Event<FormData>| {
+
+    let oninput = move |evt: Event<FormData>| {
         text.set(evt.value());
+
+        let val: Option<String> = match evt.value().as_str() {
+            "" => None,
+            text => Some(text.to_string()),
+        };
+        search_query.set(val);
     };
 
     rsx! {
@@ -25,9 +33,10 @@ pub fn SearchBar() -> Element {
                     // style: "width: {text_input_width}",
                     name: "query",
                     value: text,
-                    onchange
+                    oninput
                 }
             }
+            p { "{search_query:?}" }
         }
     }
 }

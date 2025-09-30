@@ -11,6 +11,8 @@ pub fn BusDisplay() -> Element {
     let mut bus_map = app_states.bus_map;
     let mut notification = app_states.notification;
 
+    let search_query = app_states.search_query;
+
     let sheet_id = "1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o";
 
     let onsubmit = move |_: FormEvent| async move {
@@ -46,7 +48,10 @@ pub fn BusDisplay() -> Element {
                             ul {
                                 id: "bus-list",
                                 for (name, code) in sorted {
-                                    li { "{name}: {code}" }
+                                    li {
+                                        span { class: "location-name", "{name}: " }
+                                        span { class: "location-code", "{code}" }
+                                    }
                                 }
                             }
                         }
