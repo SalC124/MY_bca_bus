@@ -1,0 +1,30 @@
+#text-input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5em;
+    display: flex;
+}
+
+#text-input-container form {
+    display: flex;
+    width: 100%;
+}
+
+#text-input {
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+.inputs {
+    border: solid var(--lavender);
+    color: var(--text);
+    display: border-box;
+    border-radius: 1em;
+    height: 3em;
+    /* margin: 0.25em; */
+    background-color: var(--mantle);
+    text-indent: 1em;
+    font-size: 1.2em;
+}

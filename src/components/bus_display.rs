@@ -3,6 +3,8 @@ use std::collections::HashMap;
 
 use crate::AppStates;
 
+const BUS_DISPLAY_CSS: Asset = asset!("/assets/styling/bus_display.css");
+
 #[component]
 pub fn BusDisplay() -> Element {
     let app_states = use_context::<AppStates>();
@@ -29,31 +31,39 @@ pub fn BusDisplay() -> Element {
         }
     };
 
-    return rsx! {
-        match bus_map.as_ref() {
-            Some(bus_map) => {
-                let mut sorted: Vec<_> = bus_map.iter().collect();
-                sorted.sort_by_key(|(name, _)| name.to_lowercase());
+    rsx! {
+        document::Link { rel: "stylesheet", href: BUS_DISPLAY_CSS }
+        div {
+            id: "bus-display",
+            match bus_map.as_ref() {
+                Some(bus_map) => {
+                    let mut sorted: Vec<_> = bus_map.iter().collect();
+                    sorted.sort_by_key(|(name, _)| name.to_lowercase());
 
-                rsx! {
-                    ul {
-                        for (name, code) in sorted {
-                            li { "{name}: {code}" }
+                    rsx! {
+                        div {
+                            id: "bus-list-container",
+                            ul {
+                                id: "bus-list",
+                                for (name, code) in sorted {
+                                    li { "{name}: {code}" }
+                                }
+                            }
                         }
                     }
                 }
-            }
-            None => rsx! {
-                div {
-                    id: "fetch buses",
-                    form {
-                        onsubmit,
-                        button { "get bus locs" },
+                None => rsx! {
+                    div {
+                        id: "fetch-buses",
+                        form {
+                            onsubmit,
+                            button { "get bus locs" },
+                        }
                     }
-                }
-            },
+                },
+            }
         }
-    };
+    }
 }
 fn parse_town_locations(csv: &str) -> HashMap<String, String> {
     let mut map = HashMap::new();

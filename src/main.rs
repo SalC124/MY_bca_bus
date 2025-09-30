@@ -3,7 +3,9 @@ use std::collections::HashMap;
 use dioxus::prelude::*;
 mod components;
 
-use crate::components::{BusDisplay, Notifications};
+use crate::components::{BusDisplay, Notifications, SearchBar, NavBar};
+
+const MAIN_CSS: Asset = asset!("/assets/styling/main.css");
 
 #[derive(Clone, Debug)]
 pub struct AppStates {
@@ -19,9 +21,11 @@ fn App() -> Element {
     });
 
     rsx! {
-        Notifications {}
-        h2 { em { "MY" }, " BCA Bus App" }
+        document::Link { rel: "stylesheet", href: MAIN_CSS }
+        NavBar {}
         BusDisplay {}
+        SearchBar {}
+        Notifications {}
     }
 }
 

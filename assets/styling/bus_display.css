@@ -1,0 +1,18 @@
+#bus-display {
+    margin-top: 4.5em;
+    margin-bottom: 5em;
+}
+
+#bus-list-container {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    /* margin-left: 1em; */
+    /* margin-right: 1em; */
+
+    background-color: var(--mantle);
+    border-radius: 1em;
+}
+
+#bus-list {
+    list-style: none;
+}

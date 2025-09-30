@@ -1,0 +1,50 @@
+/* :root { */
+/*     --black: #232634; */
+/*     --darker-gray: #292c3c; */
+/*     --dark-gray: #303446; */
+/*     --gray: #414559; */
+/*     --light-gray: #51576d; */
+/*     --lightest-gray: #b5bfe2; */
+/*     --white: #c6d0f5; */
+/**/
+/*     --teal: #81c8be; */
+/*     --light-blue: #99d1db; */
+/*     --cornflower: #85c1dc; */
+/*     --bue: #8caaee; */
+/*     --reb: #e78284; */
+/*     --orange: #ef9f76; */
+/*     --yellow: #e5c890; */
+/*     --green: #a6d189; */
+/*     --porpol: #ca9ee6; */
+/**/
+/*     /*NEW TUFF COLORS */
+/*     --blackest: #2c3531; */
+/*     --greeb: #116466; */
+/*     --tan: #d9b08c; */
+/*     --bagel: #ffcb9a; */
+/*     --perry: #d1e8e2; */
+/**/
+/*     /* used colors and their names */
+/*     --bg: var(--darker-gray); */
+/*     --match-bg: var(--bg); */
+/*     --custcard: var(--black); */
+/*     --text: var(--white); */
+/*     --link: var(--bue); */
+/*     --highlight: var(--perry); */
+/*     --icon: var(--lightest-gray); */
+/**/
+/*     background-color: var(--bg); */
+/*     color: var(--text); */
+/* } */
+
+:root {
+    --crust: #11111b;
+    --base: #1e1e2e;
+    --mantle: #181825;
+    --lavender: #b4befe;
+    --text: #c6d0f5;
+    --mauve: #cba6f7;
+
+    background-color: var(--base);
+    color: var(--text);
+}
