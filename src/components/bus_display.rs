@@ -1,4 +1,4 @@
-use dioxus::prelude::*;
+use dioxus::{logger::tracing, prelude::*};
 use std::collections::HashMap;
 
 use crate::AppStates;
@@ -46,8 +46,7 @@ pub fn BusDisplay() -> Element {
                         tbody {
                             for (name, code) in bus_vec.read().clone() {
                                 tr {
-                                    td { class: "location-name", "{name}" }
-                                    td { class: "location-code", "{code}" }
+                                    td { class: "location-name", "{name}" } td { class: "location-code", "{code}" }
                                 }
                             }
                         }
@@ -92,7 +91,21 @@ fn parse_town_locations(csv: &str) -> Vec<(String, String)> {
 }
 
 fn parse_map_to_sorted(map: HashMap<String, String>) -> Vec<(String, String)> {
-    let mut sorted: Vec<(String, String)> = map.into_iter().collect();
+    let mut sorted: Vec<(String, String)> = map
+        .into_iter()
+        .map(|(name, code)| {
+            (
+                {
+                    name.split('/')
+                        .map(|s| s.trim())
+                        .collect::<Vec<&str>>()
+                        .join(" / ")
+                },
+                code,
+            )
+        })
+        .collect();
     sorted.sort_by_key(|(name, _)| name.to_lowercase());
-    return sorted;
+
+    sorted
 }
