@@ -33,6 +33,14 @@ pub fn BusDisplay() -> Element {
         }
     };
 
+    let filtered_buses = match search_query.read().clone() {
+        Some(query) => {
+            let buses = bus_vec.read().clone();
+            buses.iter().filter(|(name, _)| name.to_lowercase().contains(&query.to_lowercase())).cloned().collect()
+        },
+        None => bus_vec.read().clone(),
+    };
+
     rsx! {
         document::Link { rel: "stylesheet", href: BUS_DISPLAY_CSS }
         div {
@@ -44,10 +52,13 @@ pub fn BusDisplay() -> Element {
                         id: "bus-list",
                         thead { style: "font-size: 1.5em", "Bus List" }
                         tbody {
-                            for (name, code) in bus_vec.read().clone() {
+                            for (name, code) in filtered_buses.clone() {
                                 tr {
                                     td { class: "location-name", "{name}" } td { class: "location-code", "{code}" }
                                 }
+                            }
+                            if filtered_buses.clone().is_empty() {
+                                p { style: "color: var(--red)", "No towns matched your query" }
                             }
                         }
                     }

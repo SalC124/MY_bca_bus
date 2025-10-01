@@ -3,8 +3,8 @@
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f44336;
-    color: white;
+    background-color: var(--red);
+    color: var(--text);
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);

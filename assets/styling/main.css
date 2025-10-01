@@ -45,6 +45,7 @@
     --text: #c6d0f5;
     --mauve: #cba6f7;
     --green: #a6e3a1;
+    --red: #f38ba8;
 
     background-color: var(--base);
     color: var(--text);
