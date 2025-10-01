@@ -29,7 +29,15 @@
     font-size: 1.2em;
     background-color: rgba(30, 30, 46, 0.7); /* --base */
     backdrop-filter: blur(0.5em);
-    -webkit-backdrop-filter: blur(1em); /* Safari support */
+
+    /* WebView specific fixes */
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+
 }
 
 input:focus {

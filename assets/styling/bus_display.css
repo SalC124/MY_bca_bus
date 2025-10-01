@@ -5,7 +5,6 @@
 
 #bus-list-container {
     padding-top: 0.5em;
-    padding-bottom: 0.5em;
     /* margin-left: 1em; */
     /* margin-right: 1em; */
 
@@ -22,14 +21,7 @@
     margin-top: 0.5em;
 
     border-collapse: collapse
-
-    /* border-bottom: 1em solid var(--text); */
 }
-
-
-/* #bus-list:last-child { */
-/*     border-bottom: none; */
-/* } */
 
 .location-name {
     color: var(--green);
@@ -41,6 +33,15 @@
     text-align: right;
 }
 
-#bus-list tbody tr:not(:last-child) {
+#bus-list tbody tr {
     border-bottom: 1px solid var(--lavender);
+}
+
+#bus-list tbody tr:last-child {
+    border-bottom: none;
+}
+
+#bus-list td {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
