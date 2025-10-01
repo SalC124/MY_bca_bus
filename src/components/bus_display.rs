@@ -1,5 +1,6 @@
-use dioxus::{logger::tracing, prelude::*};
-use std::collections::HashMap;
+use dioxus::prelude::*;
+use std::{collections::HashMap, time::Duration};
+use tokio::time::sleep;
 
 use crate::AppStates;
 
@@ -15,60 +16,77 @@ pub fn BusDisplay() -> Element {
 
     let sheet_id = "1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o";
 
-    let onsubmit = move |_: FormEvent| async move {
-        let url = format!("https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv");
+    let fetch_buses = move || {
+        spawn(async move {
+            let url =
+                format!("https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv");
 
-        let res = ureq::get(url).call();
-        match res {
-            Ok(mut success) => {
-                let res_body = success.body_mut().read_to_string();
-                match res_body {
-                    Ok(text) => {
-                        bus_vec.set(parse_town_locations(&text));
+            let res = ureq::get(url).call();
+            match res {
+                Ok(mut success) => {
+                    let res_body = success.body_mut().read_to_string();
+                    match res_body {
+                        Ok(text) => {
+                            bus_vec.set(parse_town_locations(&text));
+                        }
+                        Err(err) => notification.set(Some(format!("Error: {err}"))),
                     }
-                    Err(err) => notification.set(Some(format!("Error: {err}"))),
                 }
+                Err(err) => notification.set(Some(format!("Error: {err}"))),
             }
-            Err(err) => notification.set(Some(format!("Error: {err}"))),
-        }
+        });
+    };
+
+    let onsubmit = move |_: FormEvent| {
+        fetch_buses();
     };
 
     let filtered_buses = match search_query.read().clone() {
         Some(query) => {
             let buses = bus_vec.read().clone();
-            buses.iter().filter(|(name, _)| name.to_lowercase().contains(&query.to_lowercase())).cloned().collect()
-        },
+            buses
+                .iter()
+                .filter(|(name, _)| name.to_lowercase().contains(&query.to_lowercase()))
+                .cloned()
+                .collect()
+        }
         None => bus_vec.read().clone(),
     };
+    use_effect(move || {
+        spawn(async move {
+            loop {
+                fetch_buses();
+                sleep(Duration::from_secs(30)).await;
+            }
+        });
+    });
 
     rsx! {
         document::Link { rel: "stylesheet", href: BUS_DISPLAY_CSS }
         div {
             id: "bus-display",
-            if !bus_vec.is_empty() {
+            div {
+                id: "bus-list-container",
                 div {
-                    id: "bus-list-container",
-                    table {
-                        id: "bus-list",
-                        thead { style: "font-size: 1.5em", "Bus List" }
-                        tbody {
-                            for (name, code) in filtered_buses.clone() {
-                                tr {
-                                    td { class: "location-name", "{name}" } td { class: "location-code", "{code}" }
-                                }
-                            }
-                            if filtered_buses.clone().is_empty() {
-                                p { style: "color: var(--red)", "No towns matched your query" }
-                            }
-                        }
+                    id: "bus-list-header",
+                    span { "Bus List" }
+                    form {
+                        id: "fetch-buses",
+                        onsubmit,
+                        button { "Refresh Buses" },
                     }
                 }
-            } else {
-                div {
-                    id: "fetch-buses",
-                    form {
-                        onsubmit,
-                        button { "get bus locs" },
+                table {
+                    id: "bus-list",
+                    tbody {
+                        for (name, code) in filtered_buses.clone() {
+                            tr {
+                                td { class: "location-name", "{name}" } td { class: "location-code", "{code}" }
+                            }
+                        }
+                        if !bus_vec.read().clone().is_empty() && filtered_buses.clone().is_empty() {
+                            p { style: "color: var(--red)", "No towns matched your query" }
+                        }
                     }
                 }
             }

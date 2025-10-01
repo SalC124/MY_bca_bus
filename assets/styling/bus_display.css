@@ -17,20 +17,50 @@
     content: flex;
     margin-left: 1em;
     margin-right: 1em;
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
+    margin-bottom: 1em;
 
     border-collapse: collapse
+}
+
+#bus-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1.5em;
+}
+
+#fetch-buses {
+    margin: 0;
+}
+
+#fetch-buses form {
+    margin: 0;
+}
+
+#fetch-buses button {
+    /* padding: 0.5em 1em; */
+    background-color: var(--mauve);
+    color: var(--base);
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 0.6em;
 }
 
 .location-name {
     color: var(--green);
     text-overflow: break;
+    width: 100%;
 }
 
 .location-code {
     color: var(--lavender);
     text-align: right;
+    white-space: wrap;
 }
 
 #bus-list tbody tr {

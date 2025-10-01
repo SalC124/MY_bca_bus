@@ -3,7 +3,7 @@
 [web.app]
 
 # HTML title tag content
-title = "bussing-all-over-the-place-the-final-version"
+title = "MY BCA Bus"
 
 # include `assets` in web platform
 [web.resource]

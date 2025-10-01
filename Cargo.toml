@@ -1,5 +1,5 @@
 [package]
-name = "bussing-all-over-the-place-the-final-version"
+name = "my-bca-bus"
 version = "0.1.0"
 authors = ["SalC124 <Saltcal124@gmail.com>"]
 edition = "2021"
