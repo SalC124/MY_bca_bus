@@ -43,5 +43,4 @@
 input:focus {
     outline: none;
     border: solid var(--mauve);
-    /* background-color: var(--base); */
 }

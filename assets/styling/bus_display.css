@@ -5,8 +5,6 @@
 
 #bus-list-container {
     padding-top: 0.5em;
-    /* margin-left: 1em; */
-    /* margin-right: 1em; */
 
     background-color: var(--mantle);
     border-radius: 1em;
@@ -42,7 +40,6 @@
 }
 
 #fetch-buses button {
-    /* padding: 0.5em 1em; */
     background-color: var(--mauve);
     color: var(--base);
     border: none;

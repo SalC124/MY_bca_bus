@@ -98,16 +98,13 @@ fn parse_town_locations(csv: &str) -> Vec<(String, String)> {
     let mut map: HashMap<String, String> = HashMap::new();
 
     for line in csv.lines() {
-        // since comma-separated, split by comma and trim
         let cells: Vec<&str> = line.split(',').map(|s| s.trim()).collect();
         let mut i = 0;
-        // go through each line and check each cell (exclude the first line)
         while i + 1 < cells.len() {
             let town = cells[i];
             let loc = cells[i + 1];
             if !town.is_empty()
                 && !loc.is_empty()
-                // check that char[0] is Some and is a letter
                 && loc.chars().next().unwrap_or(' ').is_ascii_alphabetic()
             {
                 map.insert(town.to_string(), loc.to_string());

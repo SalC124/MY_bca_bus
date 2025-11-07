@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use dioxus::prelude::*;
 mod components;
 
-use crate::components::{BusDisplay, Notifications, SearchBar, NavBar};
+use crate::components::{BusDisplay, NavBar, Notifications, SearchBar};
 
 const MAIN_CSS: Asset = asset!("/assets/styling/main.css");
 
@@ -32,7 +32,6 @@ fn App() -> Element {
         Notifications {}
     }
 }
-
 
 fn main() {
     dioxus::launch(App);
