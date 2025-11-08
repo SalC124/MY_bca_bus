@@ -1,5 +1,7 @@
 [application]
 
+android_manifest = "assets/AndroidManifest.xml"
+
 [web.app]
 
 # HTML title tag content
