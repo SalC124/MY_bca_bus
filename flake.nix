@@ -57,12 +57,12 @@
 
         dioxusCli = pkgs.rustPlatform.buildRustPackage rec {
           pname = "dioxus-cli";
-          version = "0.6.3";
+          version = "0.7.1";
           src = pkgs.fetchCrate {
             inherit pname version;
-            hash = "sha256-wuIJq+UN1q5qYW4TXivq93C9kZiPHwBW5Ty2Vpik2oY=";
+            hash = "sha256-tPymoJJvz64G8QObLkiVhnW0pBV/ABskMdq7g7o9f1A=";
           };
-          cargoHash = "sha256-L9r/nJj0Rz41mg952dOgKxbDS5u4zGEjSA3EhUHfGIk=";
+          cargoHash = "sha256-mgscu6mJWinB8WXLnLNq/JQnRpHRJKMQXnMwECz1vwc=";
           nativeBuildInputs = [ pkgs.pkg-config pkgs.cacert ];
           buildInputs = [ pkgs.openssl ];
           OPENSSL_NO_VENDOR = 1;
@@ -165,6 +165,9 @@
             JAVA_HOME = "${java}";
             ANDROID_SDK_ROOT = androidSdkRoot;
             ANDROID_HOME = androidSdkRoot;
+            ANDROID_NDK_ROOT = "${androidSdkRoot}/ndk/${ndkVersion}";
+            NDK_HOME = "${androidSdkRoot}/ndk/${ndkVersion}";
+
             GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdkRoot}/build-tools/${buildToolsVersion}/aapt2";
           };
 
